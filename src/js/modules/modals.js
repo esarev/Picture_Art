@@ -1,5 +1,5 @@
 const modals = () => {
-  function blindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
+  function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
     const trigger = document.querySelectorAll(triggerSelector),
           modal = document.querySelector(modalSelector),
           close = document.querySelector(closeSelector),
@@ -47,8 +47,18 @@ const modals = () => {
 
   function showModalTime(selector, time) {
     setTimeout(() => {
-      document.querySelector(selector).style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      let display;
+      
+      document.querySelectorAll('[data-modal').forEach(item => {
+        if(getComputedStyle(item).display !== 'none') {
+          display = "block";
+        }
+      });
+
+      if(!display) {
+        document.querySelector(selector).style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
     }, time);
   }
 
@@ -67,12 +77,10 @@ const modals = () => {
     return scrollWidth;
   }
 
-  blindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
-  blindModal('.phone_link', '.popup', '.popup .popup_close');
-  blindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
-  blindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
-  blindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
-  // showModalTime('.popup', 60000);
+  bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
+  bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+
+  showModalTime('.popup-consultation', 5000);
 };
 
 export default modals;

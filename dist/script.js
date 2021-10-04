@@ -954,7 +954,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
-  function blindModal(triggerSelector, modalSelector, closeSelector) {
+  function bindModal(triggerSelector, modalSelector, closeSelector) {
     var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
@@ -997,8 +997,17 @@ var modals = function modals() {
 
   function showModalTime(selector, time) {
     setTimeout(function () {
-      document.querySelector(selector).style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      var display;
+      document.querySelectorAll('[data-modal').forEach(function (item) {
+        if (getComputedStyle(item).display !== 'none') {
+          display = "block";
+        }
+      });
+
+      if (!display) {
+        document.querySelector(selector).style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
     }, time);
   }
 
@@ -1014,11 +1023,9 @@ var modals = function modals() {
     return scrollWidth;
   }
 
-  blindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
-  blindModal('.phone_link', '.popup', '.popup .popup_close');
-  blindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
-  blindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
-  blindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false); // showModalTime('.popup', 60000);
+  bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
+  bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+  showModalTime('.popup-consultation', 5000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
