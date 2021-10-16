@@ -1,8 +1,6 @@
 const sliders = (slides, prev, dir, next) =>  {
   let slideIndex = 1;
-  const items = document.querySelectorAll(slides),
-        prevBtn = document.querySelector(prev),
-        nextBtn = document.querySelector(next);
+  const items = document.querySelectorAll(slides);
 
   function showSlides(n) {
     if(n > items.length) {
@@ -20,8 +18,25 @@ const sliders = (slides, prev, dir, next) =>  {
 
     items[slideIndex - 1].style.display = 'block';
   }
-  
+
   showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  try {
+    const prevBtn = document.querySelector(prev),
+          nextBtn = document.querySelector(next);
+
+    prevBtn.addEventListener('click', () => {
+      plusSlides(-1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+
+    });
+  } catch(e){}
 };
 
 export default sliders;
