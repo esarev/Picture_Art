@@ -12,8 +12,8 @@ const sliders = (slides, prev, dir, next) =>  {
     }
 
     items.forEach(item => {
-      item.classList.add('animated');
-      item.style.display = 'none';
+      item.classList.add("animated");
+      item.style.display = "none";
     });
 
     items[slideIndex - 1].style.display = 'block';
@@ -31,10 +31,14 @@ const sliders = (slides, prev, dir, next) =>  {
 
     prevBtn.addEventListener('click', () => {
       plusSlides(-1);
+      items[slideIndex - 1].classList.remove('slideInLeft');
+      items[slideIndex - 1].classList.add('slideInRight');
     });
 
     nextBtn.addEventListener('click', () => {
-
+      plusSlides(1);
+      items[slideIndex - 1].classList.remove('slideInRight');
+      items[slideIndex - 1].classList.add('slideInLeft');
     });
   } catch(e){}
 };
