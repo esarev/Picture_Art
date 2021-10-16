@@ -3,11 +3,11 @@ const sliders = (slides, prev, dir, next) =>  {
   const items = document.querySelectorAll(slides);
 
   function showSlides(n) {
-    if(n > items.length) {
+    if (n > items.length) {
       slideIndex = 1;
     }
 
-    if(n < 1) {
+    if (n < 1) {
       slideIndex = items.length;
     }
 
@@ -41,6 +41,7 @@ const sliders = (slides, prev, dir, next) =>  {
       items[slideIndex - 1].classList.add('slideInLeft');
     });
   } catch(e){}
+
 };
 
 export default sliders;
